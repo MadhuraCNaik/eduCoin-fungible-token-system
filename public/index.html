@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduCoin - Fungible Token System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-coins"></i>
+                <h1>EduCoin</h1>
+                <span class="symbol">EDU</span>
+            </div>
+            <div class="total-supply">
+                <span class="label">Total Supply:</span>
+                <span id="totalSupply" class="value">0</span>
+                <span class="symbol">EDU</span>
+            </div>
+        </header>
+
+        <!-- Login Section -->
+        <section class="login-section" id="loginSection">
+            <div class="card">
+                <h2><i class="fas fa-user"></i> Login</h2>
+                <p>Enter your User ID to access your wallet</p>
+                <div class="input-group">
+                    <input type="text" id="userIdInput" placeholder="Enter your User ID (e.g., admin, user1, user2)">
+                    <button onclick="login()" class="btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+                <div class="quick-login">
+                    <p>Quick Login:</p>
+                    <button onclick="quickLogin('admin')" class="btn-quick">Admin</button>
+                    <button onclick="quickLogin('user1')" class="btn-quick">User1</button>
+                    <button onclick="quickLogin('user2')" class="btn-quick">User2</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard" id="dashboard" style="display: none;">
+            <!-- User Info -->
+            <section class="user-info">
+                <div class="card">
+                    <h2><i class="fas fa-wallet"></i> Your Wallet</h2>
+                    <div class="balance-display">
+                        <span class="balance-label">Balance:</span>
+                        <span id="userBalance" class="balance-value">0</span>
+                        <span class="symbol">EDU</span>
+                    </div>
+                    <p>Logged in as: <strong id="currentUser">-</strong></p>
+                    <button onclick="logout()" class="btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </section>
+
+            <!-- Transfer Section -->
+            <section class="transfer-section">
+                <div class="card">
+                    <h2><i class="fas fa-paper-plane"></i> Transfer Tokens</h2>
+                    <div class="form-group">
+                        <label for="receiverId">Receiver ID:</label>
+                        <input type="text" id="receiverId" placeholder="Enter receiver's User ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="transferAmount">Amount:</label>
+                        <input type="number" id="transferAmount" placeholder="Enter amount to send" min="1">
+                    </div>
+                    <button onclick="transferTokens()" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send Tokens
+                    </button>
+                </div>
+            </section>
+
+            <!-- Admin Mint Section (only visible to admin) -->
+            <section class="mint-section" id="mintSection" style="display: none;">
+                <div class="card admin-card">
+                    <h2><i class="fas fa-plus-circle"></i> Mint Tokens (Admin Only)</h2>
+                    <div class="form-group">
+                        <label for="mintRecipient">Recipient ID:</label>
+                        <input type="text" id="mintRecipient" placeholder="Enter recipient's User ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="mintAmount">Amount to Mint:</label>
+                        <input type="number" id="mintAmount" placeholder="Enter amount to mint" min="1">
+                    </div>
+                    <button onclick="mintTokens()" class="btn-admin">
+                        <i class="fas fa-plus-circle"></i> Mint Tokens
+                    </button>
+                </div>
+            </section>
+
+            <!-- Balance Checker -->
+            <section class="balance-checker">
+                <div class="card">
+                    <h2><i class="fas fa-search"></i> Check Balance</h2>
+                    <div class="form-group">
+                        <label for="checkUserId">User ID:</label>
+                        <input type="text" id="checkUserId" placeholder="Enter User ID to check balance">
+                    </div>
+                    <button onclick="checkBalance()" class="btn-secondary">
+                        <i class="fas fa-search"></i> Check Balance
+                    </button>
+                    <div id="balanceResult" class="result-display"></div>
+                </div>
+            </section>
+
+            <!-- Token Explorer -->
+            <section class="explorer-section">
+                <div class="card">
+                    <h2><i class="fas fa-list"></i> Token Explorer</h2>
+                    <p>All users with token balances:</p>
+                    <button onclick="loadExplorer()" class="btn-secondary">
+                        <i class="fas fa-refresh"></i> Refresh Explorer
+                    </button>
+                    <div id="explorerResults" class="explorer-results"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Messages -->
+        <div id="messageContainer" class="message-container"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
